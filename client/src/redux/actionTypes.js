@@ -1,0 +1,1 @@
+export const INITIAL_REDUCER = 'INITIAL_REDUCER';
