@@ -1,0 +1,12 @@
+.bookcard {
+  width: 10rem;
+  position: relative;
+}
+.bookcard img {
+  max-width: 100%;
+}
+
+.bookcard-title {
+  position: absolute;
+  bottom: 0;
+}
