@@ -11,7 +11,7 @@ const booksReducer = (state = initialState, action) => {
     case CATEGORY_SEARCH:
       return {
         ...state,
-        items: action.payload.data.data.items
+        items: [...action.payload.data.data.items]
       };
     default:
       return state;

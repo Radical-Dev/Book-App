@@ -41,7 +41,7 @@ class BrowseCat extends Component {
         {!this.props.items.length ? (
           <h4>What do you wanna see</h4>
         ) : (
-          <BooksDisplay items={this.props.items} />
+          <BooksDisplay />
         )}
       </section>
     );
