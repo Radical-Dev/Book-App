@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { category_search } from '../../redux/actions/bookActions';
 import BooksDisplay from './BooksDisplay';
+import hubBg from '../../images/hub-bg.jpg';
 class BrowseCat extends Component {
   constructor(props) {
     super(props);
@@ -32,12 +33,17 @@ class BrowseCat extends Component {
   });
 
   render() {
+    let hubBgStyle = {
+      backgroundImage: `url(${hubBg})`
+    };
     return (
-      <section className="hub-main browse-cat">
+      <section style={hubBgStyle} className="hub-main browse-cat">
         <div className="heading">
           <h4 onClick={this.switchCategory}>Browse Categories</h4>
         </div>
-        <ul className="categories-section">{this.displayCategories}</ul>
+        <div className="container">
+          <ul className="categories-section">{this.displayCategories}</ul>
+        </div>
         {!this.props.items.length ? (
           <h4>What do you wanna see</h4>
         ) : (

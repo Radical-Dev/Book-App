@@ -4,7 +4,7 @@ import axios from 'axios';
 export const category_search = cat => {
   return dispatch => {
     axios
-      .get(`http://localhost:5000/api/books/browse/category/${cat}/0/10`)
+      .get(`/api/books/browse/category/${cat}/0/10`)
       .then(response => {
         dispatch(category_search_sync(response));
       })

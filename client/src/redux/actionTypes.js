@@ -1,2 +1,4 @@
 export const INITIAL_REDUCER = 'INITIAL_REDUCER';
 export const CATEGORY_SEARCH = 'CATEGORY_SEARCH';
+export const ADD_USER = 'ADD_USER';
+export const ADD_REG_ERROR = 'ADD_REG_ERROR';

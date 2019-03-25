@@ -9,6 +9,8 @@ import Hub from './components/layout/Hub';
 import Landing from './components/layout/Landing';
 
 import './App.css';
+import Register from './components/layout/Register';
+import Login from './components/layout/Login';
 
 class App extends Component {
   render() {
@@ -20,6 +22,8 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Landing} />
               <Route path="/hub" component={Hub} />
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/login" component={Login} />
             </Switch>
             <Footer />
           </Router>

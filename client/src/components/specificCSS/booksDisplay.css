@@ -1,6 +1,9 @@
 .bookcard {
   width: 10rem;
   position: relative;
+  background-color: #309a85;
+  margin-bottom: 1rem;
+  border-radius: 0% 0% 10%;
 }
 .bookcard img {
   max-width: 100%;
@@ -9,4 +12,6 @@
 .bookcard-title {
   position: absolute;
   bottom: 0;
+  color: #fff;
+  padding-bottom: 0.5rem;
 }
