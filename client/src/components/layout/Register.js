@@ -27,9 +27,21 @@ class Register extends Component {
 
     this.props.add_user(newUser, this.props.history);
   };
+
+  authenticated = this.props.auth.authenticated;
+
+  componentDidMount() {
+    if (this.authenticated) {
+      this.props.history.push('/hub');
+    }
+  }
+
   render() {
     return (
-      <div className="container">
+      <div className="authContainer">
+        <div className="title">
+          <h1>Sign-Up</h1>
+        </div>
         <form action="" method="post">
           <label htmlFor="username">Enter Username: </label>
           <input
@@ -69,12 +81,14 @@ class Register extends Component {
     );
   }
 }
-
+const mapState = state => ({
+  auth: state.auth
+});
 const mapDispatch = {
   add_user
 };
 
 export default connect(
-  null,
+  mapState,
   mapDispatch
 )(withRouter(Register));

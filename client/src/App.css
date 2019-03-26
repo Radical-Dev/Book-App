@@ -57,14 +57,31 @@ body {
   text-align: center;
 }
 
-.main-nav .main-nav-left-right-links {
+.main-nav .main-nav-left-right-links ul {
   display: flex;
   justify-content: space-around;
+  flex-grow: 1;
+}
+.main-nav .main-nav-left-right-links {
   flex-grow: 1;
 }
 .main-nav-left-right-links li {
   list-style: none;
 }
+
+.logoutItem {
+  display: flex;
+  align-items: center;
+}
+#menutext {
+  padding-right: 0.5rem;
+}
+.logoutItem img {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+}
+
 .hub-container {
   display: flex;
 }

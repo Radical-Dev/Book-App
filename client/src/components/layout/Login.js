@@ -1,14 +1,47 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { loginUser } from '../../redux/actions/authActions';
 
-export default class Login extends Component {
+class Login extends Component {
   state = {
     email: '',
-    password: ''
+    password: '',
+    authenticated: false
   };
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.auth.authenticated === true) {
+      return { authenticated: nextProps.auth.authenticated };
+    } else return null;
+  }
+
+  componentDidUpdate() {
+    if (this.state.authenticated === true) {
+      this.props.history.push('/hub');
+    }
+  }
 
   updateitems = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
+  login = e => {
+    e.preventDefault();
+    const user = {
+      email: this.state.email,
+      password: this.state.password
+    };
+
+    this.props.loginUser(user);
+  };
+
+  authenticated = this.props.auth.authenticated;
+
+  componentDidMount() {
+    if (this.authenticated) {
+      this.props.history.push('/hub');
+    }
+  }
+
   render() {
     return (
       <div className="authContainer">
@@ -42,6 +75,7 @@ export default class Login extends Component {
             className="btn waves-effect waves-light"
             type="submit"
             name="action"
+            onClick={this.login}
           >
             Submit
           </button>
@@ -50,3 +84,14 @@ export default class Login extends Component {
     );
   }
 }
+
+const mapState = state => ({
+  auth: state.auth
+});
+const mapDispatch = {
+  loginUser
+};
+export default connect(
+  mapState,
+  mapDispatch
+)(Login);
