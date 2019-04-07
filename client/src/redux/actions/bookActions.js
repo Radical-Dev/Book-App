@@ -1,4 +1,4 @@
-import { CATEGORY_SEARCH } from '../actionTypes';
+import { CATEGORY_SEARCH, VIEW_VOLUME } from '../actionTypes';
 import axios from 'axios';
 
 export const category_search = cat => {
@@ -20,5 +20,19 @@ const category_search_sync = data => {
     payload: {
       data
     }
+  };
+};
+
+export const volume_view = volId => {
+  return dispatch => {
+    axios
+      .get(`/api/books/browse/volume/${volId}`)
+      .then(res => {
+        dispatch({
+          type: VIEW_VOLUME,
+          payload: { volume: res }
+        });
+      })
+      .catch(err => {});
   };
 };

@@ -1,5 +1,5 @@
 import { INITIAL_REDUCER } from '../actionTypes';
-import { CATEGORY_SEARCH } from '../actionTypes';
+import { CATEGORY_SEARCH, VIEW_VOLUME } from '../actionTypes';
 
 const initialState = { startIndex: 0, resultsPP: 10, items: [] };
 const booksReducer = (state = initialState, action) => {
@@ -12,6 +12,11 @@ const booksReducer = (state = initialState, action) => {
       return {
         ...state,
         items: [...action.payload.data.data.items]
+      };
+    case VIEW_VOLUME:
+      return {
+        ...state,
+        volume: action.payload.volume.data
       };
     default:
       return state;

@@ -22,4 +22,19 @@ router.get('/browse/category/:catName/:startindex/:maxresults', (req, res) => {
     });
 });
 
+router.get('/browse/volume/:volId', (req, res) => {
+  axios
+    .get(
+      `https://www.googleapis.com/books/v1/volumes/${req.params.volId}?q=key=${
+        keys.booksApi
+      }`
+    )
+    .then(response => {
+      res.json(response.data);
+    })
+    .catch(err => {
+      res.json({ error: err });
+    });
+});
+
 module.exports = router;

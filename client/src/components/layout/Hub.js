@@ -4,6 +4,7 @@ import { Route, Link } from 'react-router-dom';
 import SideBar from './SideBar';
 import HubHome from './HubHome';
 import BrowseCat from './BrowseCat';
+import BrowseVol from './BrowseVol';
 class Hub extends Component {
   render() {
     return (
@@ -14,6 +15,10 @@ class Hub extends Component {
           exact
           path={`${this.props.match.path}/browse`}
           component={BrowseCat}
+        />
+        <Route
+          path={`${this.props.match.path}/browse/volume`}
+          component={BrowseVol}
         />
         <SideBar />
       </div>

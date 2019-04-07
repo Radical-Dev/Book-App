@@ -24,7 +24,7 @@ class BrowseCat extends Component {
   };
 
   displayCategories = this.categories.map(ele => {
-    console.log(ele);
+    console.log(`${this.props.match}`);
     return (
       <li onClick={this.switchCategory} key={ele} className="category">
         {ele}
@@ -47,7 +47,7 @@ class BrowseCat extends Component {
         {!this.props.items.length ? (
           <h4>What do you wanna see</h4>
         ) : (
-          <BooksDisplay />
+          <BooksDisplay path={this.props.match.path} />
         )}
       </section>
     );

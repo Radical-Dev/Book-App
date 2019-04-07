@@ -169,3 +169,51 @@ div.authContainer form button {
 .title h1 {
   text-align: center;
 }
+
+/* Browse Vol CSS */
+.volume {
+  background-color: #fff !important;
+}
+.volume .content {
+  display: flex;
+  flex-direction: column;
+}
+div.book-cover {
+  width: 12rem;
+}
+div.book-cover img {
+  max-width: 100%;
+}
+div.cover-initial-contain {
+  display: flex;
+}
+
+.book-initial-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.detail {
+  margin-bottom: 2rem;
+  margin-left: 1.5rem;
+  display: flex;
+}
+
+.detail-info {
+  display: inline-block;
+  padding-left: 1rem;
+  margin-left: 0.6rem;
+  border-left: 2px solid #59ac9e;
+}
+
+.additional-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.volume::after {
+  display: none !important;
+}

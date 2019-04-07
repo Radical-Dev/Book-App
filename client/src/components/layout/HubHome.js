@@ -9,6 +9,7 @@ export default class HubHome extends Component {
     let hubBgStyle = {
       backgroundImage: `url(${hubBg})`
     };
+    console.log(`from hubHome ${this.props.match}`);
     return (
       <section style={hubBgStyle} className="hub-main">
         <div className="heading">
