@@ -14,6 +14,9 @@ const ProfileSchema = new Schema({
   favouriteCats: {
     type: [String]
   },
+  favouriteAuthor: {
+    type: [String]
+  },
   favouriteQuote: {
     type: String
   },

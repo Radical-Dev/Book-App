@@ -33,7 +33,7 @@ class BooksDisplay extends Component {
       <div className="display-container">
         {this.props.items.map(item => {
           return (
-            <Link to={`${this.props.path}/volume/${item.id}`}>
+            <Link key={item.id} to={`${this.props.path}/volume/${item.id}`}>
               <div onClick={this.selectVol} id={item.id} className="bookcard">
                 <img alt="" src={item.volumeInfo.imageLinks.thumbnail} />
                 <div className="bookcard-title">{item.volumeInfo.title}</div>

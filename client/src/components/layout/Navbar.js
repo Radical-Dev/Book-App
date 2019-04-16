@@ -14,7 +14,10 @@ class Navbar extends Component {
         <div className="main-nav-left-right-links">
           <ul>
             <li className="menu-items">Browse</li>
-            <li className="menu-items"> Profile</li>
+            <li className="menu-items">
+              {' '}
+              <Link to="/profile">Profile</Link>{' '}
+            </li>
           </ul>
         </div>
         <div className="main-nav-logo">RBS</div>
@@ -37,7 +40,10 @@ class Navbar extends Component {
         <div className="main-nav-left-right-links">
           <ul>
             <li className="menu-items">Browse</li>
-            <li className="menu-items"> Profile</li>
+            <li className="menu-items">
+              {' '}
+              <Link to="/profile">Profile</Link>
+            </li>
             <li className="menu-items">
               {' '}
               <Link to="/register">Sign Up</Link>{' '}

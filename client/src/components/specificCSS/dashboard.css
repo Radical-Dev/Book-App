@@ -1,0 +1,28 @@
+.dashboard-container {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-around;
+}
+.profile-details,
+.profile-shelf {
+  flex-basis: 45%;
+}
+
+.profile-img {
+  width: 12rem;
+  flex-shrink: 0;
+}
+.profile-img img {
+  max-width: 100%;
+}
+.profile-intro {
+  display: flex;
+  justify-content: space-between;
+}
+.profile-quote {
+  align-self: flex-end;
+  margin-left: 1rem;
+}
+.profile-quote p {
+  margin-bottom: 0;
+}

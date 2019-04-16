@@ -10,6 +10,7 @@ class Login extends Component {
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
+    console.log('d state00');
     if (nextProps.auth.authenticated === true) {
       return { authenticated: nextProps.auth.authenticated };
     } else return null;
