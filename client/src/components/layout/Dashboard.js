@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getCurrentProfile } from '../../redux/actions/profileActions';
+import { volume_view } from '../../redux/actions/bookActions';
+
 import Loader from '../utility/Loader';
 
 import '../specificCSS/dashboard.css';
@@ -10,6 +12,11 @@ class Dashboard extends Component {
   componentDidMount() {
     this.props.getCurrentProfile();
   }
+
+  selectVol = e => {
+    this.props.volume_view(e.currentTarget.id);
+  };
+
   render() {
     const { user } = this.props.auth;
     const { profile, loading } = this.props.profile;
@@ -53,10 +60,33 @@ class Dashboard extends Component {
                   </div>
                 </div>
               </div>
+              <Link className="btn edit-profile" to="/create-profile">
+                {' '}
+                Edit{' '}
+              </Link>
             </div>
             <div className="profile-shelf">
               <div className="title shelf">
                 <h4>Shelf</h4>
+                <div className="shelf-container">
+                  {profile.bookShelf ? (
+                    profile.bookShelf.map(item => {
+                      return (
+                        <Link to={`hub/browse/volume/${item.id}`}>
+                          <div
+                            onClick={this.selectVol}
+                            id={item.id}
+                            className="shelf-item"
+                          >
+                            <img src={item.thumbnail} alt="" />
+                          </div>
+                        </Link>
+                      );
+                    })
+                  ) : (
+                    <div>Add Entry</div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -90,7 +120,8 @@ const mapState = state => {
 };
 
 const mapDispatch = {
-  getCurrentProfile
+  getCurrentProfile,
+  volume_view
 };
 export default connect(
   mapState,

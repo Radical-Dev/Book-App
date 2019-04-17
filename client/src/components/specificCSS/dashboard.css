@@ -1,12 +1,21 @@
 .dashboard-container {
-  margin-top: 2rem;
+  padding-top: 2rem;
+  background-color: #f6f5f5;
   display: flex;
   justify-content: space-around;
   color: #707070;
 }
+
 .profile-details,
 .profile-shelf {
   flex-basis: 45%;
+  background-color: #fff;
+}
+
+.profile-details {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
 }
 
 .profile-img {
@@ -30,7 +39,10 @@
   line-height: 1.6rem;
   letter-spacing: 0.4px;
 }
-
+.edit-profile {
+  align-self: center;
+  margin-top: 3rem;
+}
 .sub-section {
   margin-top: 2.5rem;
 }
@@ -42,4 +54,20 @@
 .sub-section-detail ul {
   display: flex;
   justify-content: space-between;
+}
+
+.shelf h4 {
+  text-align: center;
+}
+
+.shelf-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.shelf-item {
+  margin-left: 2rem;
+  width: 5rem;
+}
+.shelf-item img {
+  max-width: 100%;
 }

@@ -13,7 +13,9 @@ class Navbar extends Component {
       <Fragment>
         <div className="main-nav-left-right-links">
           <ul>
-            <li className="menu-items">Browse</li>
+            <li className="menu-items">
+              <Link to="/hub">Browse</Link>{' '}
+            </li>
             <li className="menu-items">
               {' '}
               <Link to="/profile">Profile</Link>{' '}
@@ -39,7 +41,9 @@ class Navbar extends Component {
       <Fragment>
         <div className="main-nav-left-right-links">
           <ul>
-            <li className="menu-items">Browse</li>
+            <li className="menu-items">
+              <Link to="/hub">Browse</Link>{' '}
+            </li>
             <li className="menu-items">
               {' '}
               <Link to="/profile">Profile</Link>

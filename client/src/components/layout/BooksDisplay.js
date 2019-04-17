@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { volume_view } from '../../redux/actions/bookActions';
@@ -10,22 +11,27 @@ class BooksDisplay extends Component {
     this.props.volume_view(e.currentTarget.id);
   };
 
-  callback(item, path) {
-    return (
-      <React.Fragment key={item.id}>
-        {/* <Link
-          onClick={this.selectVol}
-          id={item.id}
-          to={`${this.path}/volume/${item.id}`}
-        > */}
-        <div onClick={this.selectVol} id={item.id} className="bookcard">
-          <img alt="" src={item.volumeInfo.imageLinks.thumbnail} />
-          <div className="bookcard-title">{item.volumeInfo.title}</div>
-        </div>
-        {/* </Link> */}
-      </React.Fragment>
-    );
-  }
+  addVol = e => {
+    e.preventDefault();
+    let volID = e.currentTarget.nextSibling.firstChild.id;
+    axios
+      .get(`/api/books/browse/volume/${volID}`)
+      .then(res => {
+        let { volumeInfo } = res.data;
+        const data = {
+          title: volumeInfo.title,
+          status: 'Reading',
+          thumbnail: volumeInfo.imageLinks.thumbnail,
+          id: volID
+        };
+        axios.post('/api/profile/book-shelf', data).then(res => {
+          console.log(res.data);
+        });
+      })
+      .catch(err => {});
+    //console.log(e.currentTarget.nextSibling.firstChild.id);
+  };
+
   render() {
     console.log('booksDisplay below');
     console.log(this.props.path);
@@ -33,12 +39,22 @@ class BooksDisplay extends Component {
       <div className="display-container">
         {this.props.items.map(item => {
           return (
-            <Link key={item.id} to={`${this.props.path}/volume/${item.id}`}>
-              <div onClick={this.selectVol} id={item.id} className="bookcard">
-                <img alt="" src={item.volumeInfo.imageLinks.thumbnail} />
-                <div className="bookcard-title">{item.volumeInfo.title}</div>
-              </div>
-            </Link>
+            <div key={item.id} className="card-holder">
+              <Link
+                onClick={this.addVol}
+                to="/"
+                className="btn-floating waves-effect waves-light red"
+              >
+                <i className="fas fa-plus" />
+              </Link>
+
+              <Link to={`${this.props.path}/volume/${item.id}`}>
+                <div onClick={this.selectVol} id={item.id} className="bookcard">
+                  <img alt="" src={item.volumeInfo.imageLinks.thumbnail} />
+                  <div className="bookcard-title">{item.volumeInfo.title}</div>
+                </div>
+              </Link>
+            </div>
           );
         })}
       </div>
