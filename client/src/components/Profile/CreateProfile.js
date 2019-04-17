@@ -24,10 +24,17 @@ class CreateProfile extends Component {
       .then(res => {
         let handle;
         let quote = '';
+        let selectedOption = null;
         if (res.data.handle) handle = res.data.handle;
-        if (res.data.quote) quote = res.data.quote;
+        if (res.data.favouriteQuote) quote = res.data.favouriteQuote;
+        if (res.data.favouriteCats) {
+          selectedOption = res.data.favouriteCats.map(item => {
+            let retval = { value: item, label: item };
+            return retval;
+          });
+        }
 
-        this.setState({ handle, profile: {}, quote });
+        this.setState({ handle, profile: {}, quote, selectedOption });
       })
       .catch(err => {
         console.log(err);
@@ -56,6 +63,7 @@ class CreateProfile extends Component {
   };
 
   handleChange = selectedOption => {
+    console.log(selectedOption);
     this.setState({ selectedOption });
   };
 

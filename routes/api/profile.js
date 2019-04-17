@@ -43,22 +43,25 @@ router.post(
     let fields = {};
     fields.user = req.user.id;
     if (req.body.handle) fields.handle = req.body.handle;
-    if (req.body.quote) fields.quote = req.body.quote;
+    if (req.body.quote) fields.favouriteQuote = req.body.quote;
     if (req.body.authors) fields.authors = req.body.authors;
-    if (req.body.genres) fields.genres = req.body.genres;
+    if (req.body.genres) fields.favouriteCats = req.body.genres;
 
     Profile.findOne({ user: req.user.id }).then(profile => {
       if (profile) {
-        console.log(
-          'request body ' + req.body.handle + ' fields= ' + fields.handle
-        );
+        // console.log(
+        //   'request body ' + req.body.quote + ' fields= ' + fields.favouriteQuote
+        // );
         //in this case we update
         Profile.findOneAndUpdate(
           { user: req.user.id },
-          { $set: fields },
+          { $set: { ...fields } },
           { new: true }
         )
-          .then(profile => res.json(profile))
+          .then(profile => {
+            console.log('newprofile= ' + profile);
+            res.json(profile);
+          })
           .catch(err => res.json(err));
       } else {
         Profile.findOne({ handle: fields.handle }).then(profile => {

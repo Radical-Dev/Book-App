@@ -1,3 +1,7 @@
+* {
+  font-family: 'Kalam', cursive;
+  box-sizing: border-box;
+}
 img {
   width: 100%;
 }

@@ -28,7 +28,29 @@ class Dashboard extends Component {
                   <img src={user.avatar} alt={user.name} />
                 </div>
                 <div className="profile-quote">
-                  <p>{profile.quote}</p>
+                  <p>{profile.favouriteQuote}</p>
+                </div>
+              </div>
+
+              <div className="profile-info">
+                <div className="sub-section">
+                  <div className="sub-section-title">Handle</div>
+                  <div className="sub-section-detail">{profile.handle}</div>
+                </div>
+
+                <div className="sub-section">
+                  <div className="sub-section-title">Favourite Genres</div>
+                  <div className="sub-section-detail">
+                    <ul>
+                      {profile.favouriteCats ? (
+                        profile.favouriteCats.map(item => {
+                          return <li>{item}</li>;
+                        })
+                      ) : (
+                        <li>Add Entry</li>
+                      )}
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
