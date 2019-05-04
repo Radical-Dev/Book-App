@@ -80,55 +80,54 @@ class CreateProfile extends Component {
     const { selectedOption } = this.state;
 
     let profileContent;
-    if (this.state.profile === null) {
-      profileContent = <Loader />;
-    } else {
-      profileContent = (
-        <form action="">
-          <div className="input-field col s6">
-            <input
-              onChange={this.updateitems}
-              value={this.state.handle}
-              name="handle"
-              id="handle"
-              type="text"
-            />
-            <label className="active" htmlFor="handle">
-              Handle
-            </label>
-          </div>
-
-          <div className="input-field col s6">
-            <textarea
-              onChange={this.updatequote}
-              name="quote"
-              value={this.state.quote}
-              id="quote"
-              className="materialize-textarea"
-            />
-            <label className="active" htmlFor="quote">
-              Favourite Quote
-            </label>
-          </div>
-
-          <Select
-            value={selectedOption}
-            onChange={this.handleChange}
-            options={options}
-            isMulti={true}
-            placeholder="Select favourite Genres"
+    // if (this.state.profile === null) {
+    //   profileContent = <Loader />;
+    // } else {
+    profileContent = (
+      <form action="">
+        <div className="input-field col s6">
+          <input
+            onChange={this.updateitems}
+            value={this.state.handle}
+            name="handle"
+            id="handle"
+            type="text"
           />
-          <button
-            className="btn waves-effect waves-light"
-            type="submit"
-            name="action"
-            onClick={this.saveprofile}
-          >
-            Submit
-          </button>
-        </form>
-      );
-    }
+          <label className="active" htmlFor="handle">
+            Handle
+          </label>
+        </div>
+
+        <div className="input-field col s6">
+          <textarea
+            onChange={this.updatequote}
+            name="quote"
+            value={this.state.quote}
+            id="quote"
+            className="materialize-textarea"
+          />
+          <label className="active" htmlFor="quote">
+            Favourite Quote
+          </label>
+        </div>
+
+        <Select
+          value={selectedOption}
+          onChange={this.handleChange}
+          options={options}
+          isMulti={true}
+          placeholder="Select favourite Genres"
+        />
+        <button
+          className="btn waves-effect waves-light"
+          type="submit"
+          name="action"
+          onClick={this.saveprofile}
+        >
+          Submit
+        </button>
+      </form>
+    );
 
     return (
       <div className="authContainer">

@@ -1,4 +1,8 @@
-import { GET_PROFILE, PROFILE_LOADING } from '../actionTypes';
+import {
+  GET_PROFILE,
+  PROFILE_LOADING,
+  UPDATE_VOLUME_STATUS
+} from '../actionTypes';
 
 const initialState = {
   profile: null,
@@ -18,6 +22,11 @@ export default function(state = initialState, action) {
         ...state,
         profile: action.payload,
         loading: false
+      };
+    case UPDATE_VOLUME_STATUS:
+      return {
+        ...state,
+        profile: action.payload
       };
     default:
       return state;

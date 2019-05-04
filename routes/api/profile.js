@@ -109,6 +109,7 @@ router.post(
   '/book-shelf/book/update/status',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
+    console.log(req.body);
     const errors = {};
     if (!req.body.title) {
       errors.title = 'Book Title Required';

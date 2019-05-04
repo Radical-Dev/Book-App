@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import BookShelfItem from '../smallComponents/BookShelfItem';
 import { getCurrentProfile } from '../../redux/actions/profileActions';
 import { volume_view } from '../../redux/actions/bookActions';
 
@@ -72,15 +73,24 @@ class Dashboard extends Component {
                   {profile.bookShelf ? (
                     profile.bookShelf.map(item => {
                       return (
-                        <Link to={`hub/browse/volume/${item.id}`}>
-                          <div
+                        // <Link to={`hub/browse/volume/${item.id}`}>
+                        <BookShelfItem
+                          link={`hub/browse/volume/${item.id}`}
+                          key={item.id}
+                          title={item.title}
+                          status={item.status}
+                          selectVol={this.selectVol}
+                          id={item.id}
+                          thumbnail={item.thumbnail}
+                        />
+                        /* <div
                             onClick={this.selectVol}
                             id={item.id}
                             className="shelf-item"
                           >
                             <img src={item.thumbnail} alt="" />
-                          </div>
-                        </Link>
+                          </div> */
+                        // </Link>
                       );
                     })
                   ) : (
