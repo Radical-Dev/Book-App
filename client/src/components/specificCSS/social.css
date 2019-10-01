@@ -1,0 +1,52 @@
+.new_people_list_items {
+  display: flex;
+}
+.new_people_list_items > * {
+  flex-basis: 12%;
+}
+
+.user-card-img img {
+  max-width: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.user-card {
+  margin-right: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.user-card-icons {
+  display: flex;
+}
+.user-card-icons > *:first-child {
+  margin-right: 0.5rem;
+}
+
+.fc-icon svg {
+  font-size: 0.9rem;
+  color: rgb(88, 190, 155);
+}
+
+.green-text-custom {
+  color: #2a675f;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.social {
+  display: flex;
+}
+.friend-list {
+  flex-basis: 50%;
+}
+.friend-list .title {
+  text-align: center;
+  margin-top: 1rem;
+}
+.title {
+  font-size: 1.7rem;
+}

@@ -36,6 +36,7 @@ const ProfileSchema = new Schema({
       }
     }
   ],
+  friends: [{ type: Schema.Types.ObjectId, ref: 'profile' }],
   date: {
     type: Date,
     default: Date.now

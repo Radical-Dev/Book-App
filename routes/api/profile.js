@@ -28,6 +28,24 @@ router.get(
   }
 );
 
+router.get(
+  '/all',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    const errors = {};
+    Profile.find({})
+      .populate('user')
+      .then(profiles => {
+        if (!profiles) {
+          errors.noprofiles = 'No profiles found';
+          return res.status(400).json(errors);
+        }
+        res.json(profiles);
+      })
+      .catch(err => res.status(404).json(error));
+  }
+);
+
 //Create Profile
 router.post(
   '/',
@@ -127,6 +145,38 @@ router.post(
         });
       })
       .catch(err => res.json(err));
+  }
+);
+
+// @route   post api/profile/add-friend
+// @desc    Add new friend
+// @access  Private
+router.post(
+  '/add-friend',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    console.log(`add friend ${req.body.friendID}`);
+    //Within this block, I am adding a user's profile into the friend field available in the profile model
+    Profile.findOne({ user: req.user.id })
+      .then(mainuser => {
+        Profile.findOne({ _id: req.body.friendID })
+          .then(friendToAdd => {
+            console.log('found friend!');
+            console.log(friendToAdd);
+            mainuser.friends.unshift(friendToAdd._id);
+            mainuser.save().then(profile => {
+              console.log('friend saved');
+              res.json(profile);
+            });
+          })
+          .catch(err => {
+            console.log('not found friend!');
+            res.json({ error: 'could not add friend (inner)' });
+          });
+      })
+      .catch(err => {
+        res.json({ error: 'main user not found' });
+      });
   }
 );
 

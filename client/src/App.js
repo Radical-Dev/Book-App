@@ -13,6 +13,7 @@ import Landing from './components/layout/Landing';
 import Dashboard from './components/layout/Dashboard';
 import PrivateRoute from './components/utility/PrivateRoute';
 import CreateProfile from './components/Profile/CreateProfile';
+import Social from './components/social/Social';
 
 import './App.css';
 import Register from './components/layout/Register';
@@ -47,13 +48,14 @@ class App extends Component {
             <Navbar />
             <Switch>
               <Route exact path="/" component={Landing} />
-              <Route path="/hub" component={Hub} />
+              <PrivateRoute path="/hub" component={Hub} />
               <PrivateRoute exact path="/profile" component={Dashboard} />
               <PrivateRoute
                 exact
                 path="/create-profile"
                 component={CreateProfile}
               />
+              <PrivateRoute exact path="/social" component={Social} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
             </Switch>

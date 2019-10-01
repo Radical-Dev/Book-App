@@ -25,7 +25,10 @@ class Navbar extends Component {
         <div className="main-nav-logo">RBS</div>
         <div className="main-nav-left-right-links">
           <ul>
-            <li className="menu-items"> Social Hub</li>
+            <li className="menu-items">
+              {' '}
+              <Link to="/social">Social Hub</Link>
+            </li>
             <li className="menu-items"> Search </li>
             <li onClick={this.logOut} className="menu-items">
               <div className="logoutItem">
@@ -57,7 +60,10 @@ class Navbar extends Component {
         <div className="main-nav-logo">RBS</div>
         <div className="main-nav-left-right-links">
           <ul>
-            <li className="menu-items"> Social Hub</li>
+            <li className="menu-items">
+              {' '}
+              <Link to="/social">Social Hub</Link>
+            </li>
             <li className="menu-items"> Search </li>
             <li className="menu-items">
               {' '}

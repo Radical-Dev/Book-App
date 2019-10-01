@@ -4,7 +4,9 @@ import {
   GET_PROFILE,
   PROFILE_LOADING,
   SAVE_PROFILE,
-  UPDATE_VOLUME_STATUS
+  UPDATE_VOLUME_STATUS,
+  GET_ALL_PROFILES,
+  ADD_FRIEND
 } from '../actionTypes';
 
 export const getCurrentProfile = () => dispatch => {
@@ -20,6 +22,24 @@ export const getCurrentProfile = () => dispatch => {
     .catch(err =>
       dispatch({
         type: GET_PROFILE,
+        payload: []
+      })
+    );
+};
+
+export const getAllProfiles = () => dispatch => {
+  dispatch(setProfileLoading());
+  axios
+    .get('/api/profile/all')
+    .then(res => {
+      dispatch({
+        type: GET_ALL_PROFILES,
+        payload: res.data
+      });
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_ALL_PROFILES,
         payload: []
       })
     );
@@ -66,6 +86,21 @@ export const volume_status_update = (volTitle, status) => {
       });
     //dispatch({ type: UPDATE_VOLUME_STATUS });
   };
+};
+
+export const add_new_friend = friendID => dispatch => {
+  axios
+    .post('api/profile/add-friend', { friendID })
+    .then(res => {
+      console.log(`from add friend ${res.data}`);
+      dispatch({
+        type: ADD_FRIEND,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      console.log(`add friend error`);
+    });
 };
 
 // export const volume_status_update = (volTitle, status) => dispatch => {
