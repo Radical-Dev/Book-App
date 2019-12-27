@@ -1,22 +1,30 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { getAllProfiles } from '../../redux/actions/profileActions';
+import { getAllProfiles, getCurrentProfile} from '../../redux/actions/profileActions';
 import UserCard from './UserCard';
+import Loader from '../utility/Loader';
 
 import '../specificCSS/social.css';
 
 class Social extends Component {
   componentDidMount() {
     this.props.getAllProfiles();
+    this.props.getCurrentProfile("yes");
   }
-
+loading= true;
   render() {
     let profiles = {};
     this.props.profile.profiles
       ? (profiles = this.props.profile.profiles)
       : (profiles = null);
+      let friends ={};
+      if(this.props.profile.profile != null && this.props.profile.profile.friends != null){
+       (friends = this.props.profile.profile.friends)}
+       else (friends = null);
     return (
       <div className="container social">
+        {this.props.profile.loading ? <Loader/> : 
+        <Fragment>
         <div className="new_people_list friend-list">
           <div className="title green-text-custom">
             Discover new Reading buddies!
@@ -40,9 +48,28 @@ class Social extends Component {
 
         <div className="old-friends friend-list">
           <div className="title green-text-custom">Existing friends</div>
+          <div className="new_people_list_items">
+            {friends!=null ? (
+              friends.map(friend => {
+                return (
+                  <UserCard
+                    id={friend._id}
+                    handle={friend.handle}
+                    avatar={friend.user.avatar}
+                  />
+                );
+              })
+            ) : (
+              <div />
+            )}
+          </div>
         </div>
+        </Fragment>
+  }
       </div>
+            
     );
+          
   }
 }
 
@@ -54,7 +81,7 @@ const mapState = state => {
 };
 
 const mapDispatch = {
-  getAllProfiles
+  getAllProfiles,getCurrentProfile
 };
 export default connect(
   mapState,

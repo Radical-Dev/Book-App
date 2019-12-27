@@ -31,6 +31,7 @@ const authReducer = (state = initialState, action) => {
         }
       };
     case SET_CURRENT_USER:
+      console.log(action.payload);
       return {
         ...state,
         authenticated: !isEmpty(action.payload),

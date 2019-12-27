@@ -6,13 +6,14 @@ import {
   SAVE_PROFILE,
   UPDATE_VOLUME_STATUS,
   GET_ALL_PROFILES,
-  ADD_FRIEND
+  ADD_FRIEND,CLEAN_PROFILE
 } from '../actionTypes';
 
-export const getCurrentProfile = () => dispatch => {
+//Default the friends param to no
+export const getCurrentProfile = (friends="no") => dispatch => {
   dispatch(setProfileLoading());
   axios
-    .get('/api/profile')
+    .get(`/api/profile?friends=${friends}`)
     .then(res => {
       dispatch({
         type: GET_PROFILE,
@@ -26,6 +27,7 @@ export const getCurrentProfile = () => dispatch => {
       })
     );
 };
+
 
 export const getAllProfiles = () => dispatch => {
   dispatch(setProfileLoading());
@@ -48,6 +50,12 @@ export const getAllProfiles = () => dispatch => {
 export const setProfileLoading = () => {
   return {
     type: PROFILE_LOADING
+  };
+};
+
+export const cleanProfileState = () => {
+  return {
+    type: CLEAN_PROFILE
   };
 };
 

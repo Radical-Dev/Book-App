@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import BookShelfItem from '../smallComponents/BookShelfItem';
-import { getCurrentProfile } from '../../redux/actions/profileActions';
+import { getCurrentProfile, cleanProfileState } from '../../redux/actions/profileActions';
 import { volume_view } from '../../redux/actions/bookActions';
 
 import Loader from '../utility/Loader';
@@ -12,6 +12,10 @@ import '../specificCSS/dashboard.css';
 class Dashboard extends Component {
   componentDidMount() {
     this.props.getCurrentProfile();
+  }
+
+  componentWillUnmount(){
+    this.props.cleanProfileState();
   }
 
   selectVol = e => {
@@ -131,7 +135,8 @@ const mapState = state => {
 
 const mapDispatch = {
   getCurrentProfile,
-  volume_view
+  volume_view,
+  cleanProfileState
 };
 export default connect(
   mapState,

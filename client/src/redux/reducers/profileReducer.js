@@ -3,7 +3,8 @@ import {
   PROFILE_LOADING,
   UPDATE_VOLUME_STATUS,
   GET_ALL_PROFILES,
-  ADD_FRIEND
+  ADD_FRIEND,
+  CLEAN_PROFILE
 } from '../actionTypes';
 
 const initialState = {
@@ -38,6 +39,11 @@ export default function(state = initialState, action) {
     case ADD_FRIEND:
       return {
         ...state
+      };
+      case CLEAN_PROFILE:
+      return {
+        ...state,
+        profile:null
       };
     default:
       return state;

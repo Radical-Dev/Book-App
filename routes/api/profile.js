@@ -11,11 +11,31 @@ const User = require('../../models/User');
 
 router.post('/create-profile', (req, res) => {});
 
+//Get All profiles. if query is friends=yes then pupulate friends and user fields in document
 router.get(
   '/',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     const errors = {};
+    if (req.query.friends && req.query.friends=="yes"){
+      console.log("found param");
+      Profile.findOne({ user: req.user.id })
+      .populate({
+        path : 'friends',
+        populate : {
+          path : 'user'
+        }
+      })
+      .then(profile => {
+        if (!profile) {
+          errors.noprofile = 'No profile for this user';
+          return res.status(400).json(errors);
+        }
+        res.json(profile);
+      })
+      .catch(err => res.status(404).json(error));
+    }
+    else{
     Profile.findOne({ user: req.user.id })
       .then(profile => {
         if (!profile) {
@@ -25,6 +45,7 @@ router.get(
         res.json(profile);
       })
       .catch(err => res.status(404).json(error));
+    }
   }
 );
 
@@ -155,19 +176,23 @@ router.post(
   '/add-friend',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    console.log(`add friend ${req.body.friendID}`);
     //Within this block, I am adding a user's profile into the friend field available in the profile model
     Profile.findOne({ user: req.user.id })
       .then(mainuser => {
         Profile.findOne({ _id: req.body.friendID })
           .then(friendToAdd => {
-            console.log('found friend!');
-            console.log(friendToAdd);
+            //Prevent the sam friend from being added twice
+            if(!mainuser.friends.includes(friendToAdd._id)){
+              console.log('New friend!');
             mainuser.friends.unshift(friendToAdd._id);
             mainuser.save().then(profile => {
               console.log('friend saved');
               res.json(profile);
             });
+          }
+          else{
+            res.json({ error: 'Friend already present' });
+          }
           })
           .catch(err => {
             console.log('not found friend!');
