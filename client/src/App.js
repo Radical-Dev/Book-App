@@ -49,7 +49,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Landing} />
               <PrivateRoute path="/hub" component={Hub} />
-              <PrivateRoute exact path="/profile" component={Dashboard} />
+              <PrivateRoute path="/profile" component={Dashboard} />
               <PrivateRoute
                 exact
                 path="/create-profile"

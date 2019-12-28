@@ -18,9 +18,11 @@ class UserCard extends Component {
           {this.props.handle}
         </div>
         <div className="user-card-icons">
-          <div onClick={this.senduser} className="add-friend-icon fc-icon">
+          {this.props.new ? <div onClick={this.senduser} className="add-friend-icon fc-icon">
             <i className="fas fa-user-plus" />
           </div>
+          :<div/>
+          }
           <div className="view-friend-icon fc-icon">
             {' '}
             <i className="fas fa-binoculars" />{' '}

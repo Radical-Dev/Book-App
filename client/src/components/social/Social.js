@@ -21,6 +21,25 @@ loading= true;
       if(this.props.profile.profile != null && this.props.profile.profile.friends != null){
        (friends = this.props.profile.profile.friends)}
        else (friends = null);
+
+       let friendDisplay;
+
+       friends != null ? 
+       friendDisplay = friends.map(friend => {
+         if(typeof friend ==="object"){
+           console.log(typeof friend);
+          return (
+            <UserCard
+              id={friend._id}
+              handle={friend.handle}
+              avatar={friend.user.avatar}
+            />
+          );}
+          else return <div>Test 1 </div>;
+        })
+       : friendDisplay = <div>Test 2 </div>;
+
+
     return (
       <div className="container social">
         {this.props.profile.loading ? <Loader/> : 
@@ -37,6 +56,7 @@ loading= true;
                     id={profile._id}
                     handle={profile.handle}
                     avatar={profile.user.avatar}
+                    new={true}
                   />
                 );
               })
@@ -49,19 +69,7 @@ loading= true;
         <div className="old-friends friend-list">
           <div className="title green-text-custom">Existing friends</div>
           <div className="new_people_list_items">
-            {friends!=null ? (
-              friends.map(friend => {
-                return (
-                  <UserCard
-                    id={friend._id}
-                    handle={friend.handle}
-                    avatar={friend.user.avatar}
-                  />
-                );
-              })
-            ) : (
-              <div />
-            )}
+            {friendDisplay}
           </div>
         </div>
         </Fragment>

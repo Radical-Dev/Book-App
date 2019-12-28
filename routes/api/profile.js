@@ -50,6 +50,25 @@ router.get(
 );
 
 router.get(
+  '/:profileID',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    const errors = {};
+    Profile.findOne({user: req.params.profileID})
+      .populate('user')
+      .then(profile => {
+        if (!profile) {
+          errors.noprofile = 'Profile not found';
+          return res.status(400).json(errors);
+        }
+        res.json(profile);
+      })
+      .catch(err => res.status(404).json(error));
+  }
+);
+
+
+router.get(
   '/all',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
@@ -119,7 +138,6 @@ router.post(
 );
 
 //Add Book to shelf
-//revisit to enable editting of book status
 router.post(
   '/book-shelf',
   passport.authenticate('jwt', { session: false }),
@@ -144,6 +162,7 @@ router.post(
   }
 );
 
+// Update book status
 router.post(
   '/book-shelf/book/update/status',
   passport.authenticate('jwt', { session: false }),
