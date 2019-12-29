@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import BookShelfItem from '../smallComponents/BookShelfItem';
-import { getCurrentProfile, cleanProfileState } from '../../redux/actions/profileActions';
+import { getCurrentProfile, cleanProfileState, searchProfile } from '../../redux/actions/profileActions';
 import { volume_view } from '../../redux/actions/bookActions';
 import Profile from '../Profile/Profile';
 
@@ -18,7 +18,10 @@ class Dashboard extends Component {
   }
   
   componentDidMount() {
-    this.props.getCurrentProfile();
+    console.log("test param", typeof this.props.match.params.profileID);
+    let {profileID} = this.props.match.params; 
+    !profileID ? this.props.getCurrentProfile()
+    : this.props.searchProfile(profileID);
   }
 
   componentWillUnmount(){
@@ -30,9 +33,9 @@ class Dashboard extends Component {
   };
 
   render() {
-    const { user } = this.props.auth;
     const { profile, loading } = this.props.profile;
-
+    let user;
+    profile ? user = profile.user : user ={};
     let dashBoardContent;
     console.log(profile);
     if (profile === null || loading) {
@@ -57,7 +60,8 @@ const mapState = state => {
 const mapDispatch = {
   getCurrentProfile,
   volume_view,
-  cleanProfileState
+  cleanProfileState,
+  searchProfile
 };
 export default connect(
   mapState,

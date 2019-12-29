@@ -33,6 +33,7 @@ loading= true;
               id={friend._id}
               handle={friend.handle}
               avatar={friend.user.avatar}
+              usrID={friend.user._id}
             />
           );}
           else return <div>Test 1 </div>;

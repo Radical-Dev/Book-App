@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { add_new_friend } from '../../redux/actions/profileActions';
 
@@ -25,7 +25,10 @@ class UserCard extends Component {
           }
           <div className="view-friend-icon fc-icon">
             {' '}
-            <i className="fas fa-binoculars" />{' '}
+            <Link to ={`/profile/${this.props.usrID}`}>
+            <i className="fas fa-binoculars" />
+            </Link>
+            {' '}
           </div>
         </div>
       </div>

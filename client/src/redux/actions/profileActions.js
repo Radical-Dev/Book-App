@@ -28,6 +28,23 @@ export const getCurrentProfile = (friends="no") => dispatch => {
     );
 };
 
+export const searchProfile = (id) => dispatch => {
+  dispatch(setProfileLoading());
+  axios
+    .get(`/api/profile/${id}`)
+    .then(res => {
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data
+      });
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_PROFILE,
+        payload: []
+      })
+    );
+};
 
 export const getAllProfiles = () => dispatch => {
   dispatch(setProfileLoading());
