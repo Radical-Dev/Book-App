@@ -4,13 +4,15 @@ import {
   UPDATE_VOLUME_STATUS,
   GET_ALL_PROFILES,
   ADD_FRIEND,
-  CLEAN_PROFILE
+  CLEAN_PROFILE,
+  UPDATE_LAYOUT
 } from '../actionTypes';
 
 const initialState = {
   profile: null,
   profiles: null,
-  loading: false
+  loading: false,
+  ui:'standard'
 };
 
 export default function(state = initialState, action) {
@@ -45,6 +47,11 @@ export default function(state = initialState, action) {
         ...state,
         profile:null
       };
+      case UPDATE_LAYOUT:
+        return {
+          ...state,
+          ui:action.payload.ui
+        };
     default:
       return state;
   }

@@ -34,6 +34,7 @@ loading= true;
               handle={friend.handle}
               avatar={friend.user.avatar}
               usrID={friend.user._id}
+              isFriend={true}
             />
           );}
           else return <div>Test 1 </div>;
@@ -57,7 +58,7 @@ loading= true;
                     id={profile._id}
                     handle={profile.handle}
                     avatar={profile.user.avatar}
-                    new={true}
+                    isFriend={false}
                   />
                 );
               })

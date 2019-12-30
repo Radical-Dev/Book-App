@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import BookShelfItem from '../smallComponents/BookShelfItem';
-import { getCurrentProfile, cleanProfileState, searchProfile } from '../../redux/actions/profileActions';
+import { getCurrentProfile, cleanProfileState, searchProfile,updateLayout } from '../../redux/actions/profileActions';
 import { volume_view } from '../../redux/actions/bookActions';
 import Profile from '../Profile/Profile';
 
@@ -20,8 +20,14 @@ class Dashboard extends Component {
   componentDidMount() {
     console.log("test param", typeof this.props.match.params.profileID);
     let {profileID} = this.props.match.params; 
-    !profileID ? this.props.getCurrentProfile()
-    : this.props.searchProfile(profileID);
+    if(!profileID){
+     this.props.getCurrentProfile()
+     this.props.updateLayout('standard');
+    }
+     else{
+      this.props.searchProfile(profileID);
+      this.props.updateLayout('secondary');
+    }
   }
 
   componentWillUnmount(){
@@ -33,7 +39,7 @@ class Dashboard extends Component {
   };
 
   render() {
-    const { profile, loading } = this.props.profile;
+    const { profile, loading, ui } = this.props.profile;
     let user;
     profile ? user = profile.user : user ={};
     let dashBoardContent;
@@ -41,7 +47,7 @@ class Dashboard extends Component {
     if (profile === null || loading) {
       dashBoardContent = <Loader />;
     } else {
-      dashBoardContent = <Profile user={user} profile={profile} selectVol={this.selectVol}/>
+      dashBoardContent = <Profile style={ui} user={user} profile={profile} selectVol={this.selectVol}/>
     }
     return (
       <section className="dashboard">
@@ -61,7 +67,8 @@ const mapDispatch = {
   getCurrentProfile,
   volume_view,
   cleanProfileState,
-  searchProfile
+  searchProfile,
+  updateLayout
 };
 export default connect(
   mapState,

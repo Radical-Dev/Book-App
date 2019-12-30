@@ -2,6 +2,7 @@ import React,{Fragment} from 'react'
 import { Link } from 'react-router-dom';
 import BookShelfItem from '../smallComponents/BookShelfItem';
 export default function Profile(props) {
+  console.log('style= ', props.style);
 let dashBoardContent;
     if (Object.keys(props.profile).length > 0) {
         dashBoardContent = (
@@ -37,10 +38,12 @@ let dashBoardContent;
                   </div>
                 </div>
               </div>
+              {props.style === "standard" ?
               <Link className="btn edit-profile" to="/create-profile">
                 {' '}
                 Edit{' '}
               </Link>
+              :<div/>}
             </div>
             <div className="profile-shelf">
               <div className="title shelf">
@@ -51,13 +54,14 @@ let dashBoardContent;
                       return (
                         // <Link to={`hub/browse/volume/${item.id}`}>
                         <BookShelfItem
-                          link={`hub/browse/volume/${item.id}`}
+                          link={`/hub/browse/volume/${item.id}`}
                           key={item.id}
                           title={item.title}
                           status={item.status}
                           selectVol={props.selectVol}
                           id={item.id}
                           thumbnail={item.thumbnail}
+                          style={props.style}
                         />
                         /* <div
                             onClick={this.selectVol}

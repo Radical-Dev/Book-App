@@ -34,6 +34,7 @@ class BookShelfItem extends Component {
             <img src={this.props.thumbnail} alt="" />
           </div>
         </Link>
+        {this.props.style==="standard" ?
         <div className="shelf-overlay">
           <ul className="shelf-overlay-list">
             <li onClick={this.readClick}>
@@ -66,6 +67,7 @@ class BookShelfItem extends Component {
             </li>
           </ul>
         </div>
+        :<div/>}
       </div>
     );
   }

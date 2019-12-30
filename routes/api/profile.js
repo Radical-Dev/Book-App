@@ -70,7 +70,7 @@ router.get(
 
 
 router.get(
-  '/all',
+  '/all/profiles',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     const errors = {};

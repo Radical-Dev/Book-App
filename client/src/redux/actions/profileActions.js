@@ -6,7 +6,7 @@ import {
   SAVE_PROFILE,
   UPDATE_VOLUME_STATUS,
   GET_ALL_PROFILES,
-  ADD_FRIEND,CLEAN_PROFILE
+  ADD_FRIEND,CLEAN_PROFILE, UPDATE_LAYOUT
 } from '../actionTypes';
 
 //Default the friends param to no
@@ -49,7 +49,7 @@ export const searchProfile = (id) => dispatch => {
 export const getAllProfiles = () => dispatch => {
   dispatch(setProfileLoading());
   axios
-    .get('/api/profile/all')
+    .get('/api/profile/all/profiles')
     .then(res => {
       dispatch({
         type: GET_ALL_PROFILES,
@@ -73,6 +73,13 @@ export const setProfileLoading = () => {
 export const cleanProfileState = () => {
   return {
     type: CLEAN_PROFILE
+  };
+};
+
+export const updateLayout = (style) => {
+  return {
+    type: UPDATE_LAYOUT,
+    payload:{ui:style}
   };
 };
 
