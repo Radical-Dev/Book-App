@@ -24,3 +24,15 @@
   top: 0;
   right: 0;
 }
+.prev,.next{
+  color:#fff;
+}
+
+.cat-pagination{
+  display:flex;
+  justify-content: space-around;
+}
+.cat-pagination > div{
+text-decoration: underline;
+cursor: pointer;
+}

@@ -1,12 +1,13 @@
 import { CATEGORY_SEARCH, VIEW_VOLUME } from '../actionTypes';
 import axios from 'axios';
 
-export const category_search = cat => {
+export const category_search = (cat,page=0,perPage=10) => {
+  let strtIndex = page*perPage;
   return dispatch => {
     axios
-      .get(`/api/books/browse/category/${cat}/0/10`)
+      .get(`/api/books/browse/category/${cat}/${strtIndex}/${perPage}`)
       .then(response => {
-        dispatch(category_search_sync(response));
+        dispatch(category_search_sync(response,cat,page));
       })
       .catch(err => {
         console.log(err);
@@ -14,11 +15,13 @@ export const category_search = cat => {
   };
 };
 
-const category_search_sync = data => {
+const category_search_sync = (data,cat,page) => {
   return {
     type: CATEGORY_SEARCH,
     payload: {
-      data
+      data,
+      category:cat,
+      page
     }
   };
 };

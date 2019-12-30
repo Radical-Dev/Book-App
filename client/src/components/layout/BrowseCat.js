@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component,Fragment } from 'react';
 import { connect } from 'react-redux';
 import { category_search } from '../../redux/actions/bookActions';
 import BooksDisplay from './BooksDisplay';
@@ -9,6 +9,8 @@ class BrowseCat extends Component {
 
     // This binding is necessary to make `this` work in the callback
     this.switchCategory = this.switchCategory.bind(this);
+    this.paginateNext = this.paginateNext.bind(this);
+    this.paginatePrev = this.paginatePrev.bind(this);
   }
   categories = [
     'Thriller',
@@ -18,6 +20,15 @@ class BrowseCat extends Component {
     'Fantasy',
     'Adventure'
   ];
+
+  paginateNext= () =>{
+    this.props.category_search(this.props.category,this.props.page+1);
+  }
+
+  paginatePrev= () =>{
+    this.props.category_search(this.props.category,this.props.page-1);
+  }
+
   switchCategory = e => {
     const viewCategory = e.target.textContent;
     this.props.category_search(viewCategory);
@@ -45,22 +56,24 @@ class BrowseCat extends Component {
           <ul className="categories-section">{this.displayCategories}</ul>
         </div>
         {!this.props.items.length ? (
-          <h4>What do you wanna see</h4>
+          <h4>Select Category above.</h4>
         ) : (
+          <Fragment>
           <BooksDisplay path={this.props.match.path} />
+          <div className="cat-pagination"> {!this.props.page<1 ? <div onClick={this.paginatePrev} className="prev">Prev</div> :<div/> } <div onClick={this.paginateNext} className="next">Next</div> </div>
+          </Fragment>
         )}
       </section>
     );
   }
 }
 const mapState = state => {
-  const { startIndex } = state;
-  const { resultsPP } = state;
 
   return {
     items: state.books.items,
-    startIndex,
-    resultsPP
+    page: state.books.page,
+    resultsPP:state.books.resultsPP,
+    category:state.books.category
   };
 };
 const mapDispactToProps = {
