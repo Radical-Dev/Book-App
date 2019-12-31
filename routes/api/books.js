@@ -25,9 +25,22 @@ router.get('/browse/category/:catName/:startindex/:maxresults', (req, res) => {
 router.get('/browse/volume/:volId', (req, res) => {
   axios
     .get(
-      `https://www.googleapis.com/books/v1/volumes/${req.params.volId}?q=key=${
+      `https://www.googleapis.com/books/v1/volumes/${req.params.volId}?q=&key=${
         keys.booksApi
       }`
+    )
+    .then(response => {
+      res.json(response.data);
+    })
+    .catch(err => {
+      res.json({ error: err });
+    });
+});
+
+router.get('/browse/search/:searchTerm/:startindex/:maxresults', (req, res) => {
+  axios
+    .get(
+      `https://www.googleapis.com/books/v1/volumes?q=${req.params.searchTerm}&startIndex=${req.params.startindex}&maxResults=${req.params.maxresults}&key=${keys.booksApi}`
     )
     .then(response => {
       res.json(response.data);

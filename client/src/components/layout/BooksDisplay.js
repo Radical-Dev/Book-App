@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component,Fragment } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { volume_view } from '../../redux/actions/bookActions';
+
 
 import '../specificCSS/booksDisplay.css';
 
@@ -39,7 +40,9 @@ class BooksDisplay extends Component {
       <div className="display-container">
         {this.props.items.map(item => {
           return (
-            <div key={item.id} className="card-holder">
+            <Fragment>
+            {item.volumeInfo.imageLinks ? 
+              <div key={item.id} className="card-holder">
               <Link
                 onClick={this.addVol}
                 to="/"
@@ -48,13 +51,17 @@ class BooksDisplay extends Component {
                 <i className="fas fa-plus" />
               </Link>
 
-              <Link to={`${this.props.path}/volume/${item.id}`}>
+              <Link to={`/hub/browse/volume/${item.id}`}>
                 <div onClick={this.selectVol} id={item.id} className="bookcard">
                   <img alt="" src={item.volumeInfo.imageLinks.thumbnail} />
                   <div className="bookcard-title">{item.volumeInfo.title}</div>
                 </div>
               </Link>
             </div>
+              :<div key={item.id}/>
+          }
+          </Fragment>
+            
           );
         })}
       </div>
@@ -63,7 +70,8 @@ class BooksDisplay extends Component {
 }
 const mapState = state => {
   return {
-    items: [...state.books.items]
+    items: [...state.books.items],
+    
   };
 };
 export default connect(

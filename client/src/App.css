@@ -124,7 +124,6 @@ body {
 .browse .icon {
   height: auto;
   width: 7rem;
-  height: 12rem;
 }
 
 .iconTitle {
@@ -220,4 +219,17 @@ div.cover-initial-contain {
 
 .volume::after {
   display: none !important;
+}
+
+.hub-main-content{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.iconTitle.search{
+  left: 7.5rem;
+}
+
+#search-btn{
+  margin-bottom: 2rem;
 }
